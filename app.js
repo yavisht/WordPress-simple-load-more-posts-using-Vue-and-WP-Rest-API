@@ -22,7 +22,7 @@ Vue.component('post', {
 new Vue({
     el: '#app',
     data: {
-        greeting: 'WP API',
+        greeting: 'Load more Posts Vue + WP REST API',
         page : 0,
         posts: [],
         totalPages: '',
