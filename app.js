@@ -7,11 +7,12 @@ Vue.component('posts', {
 });
 
 Vue.component('post', {
-    props: ['title', 'excerpt'],
+    props: ['title', 'excerpt', 'permalink'],
     template: `
     <li>
-        <p>{{title}}</p>
-        <p v-html="excerpt"></p>
+        <h3 v-html="title"></h3>
+        <div v-if="excerpt" v-html="excerpt"></div>
+        <a :href="permalink">Read More</a>
     </li>
     `
     
