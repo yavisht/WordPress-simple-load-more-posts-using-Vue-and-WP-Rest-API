@@ -9,6 +9,7 @@
   <style>
     .box{margin-top:50px;}
   </style>
+
 </head>
 
 <body>
@@ -28,9 +29,10 @@
           class="post"
           :id="'post' + post.id"
           :title="post.title.rendered"
-          :excerpt="post.excerpt.rendered"
           :permalink="post.link"
-          :key="post.id">
+          :key="post.id"
+          >
+          <!-- Add above for excerpt :excerpt="post.excerpt.rendered" -->
         </post>
       </posts>
   
