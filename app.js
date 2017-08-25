@@ -13,6 +13,7 @@ Vue.component('post', {
         <h3 v-html="title"></h3>
         <div v-if="excerpt" v-html="excerpt"></div>
         <a :href="permalink">Read More</a>
+        <hr />
     </li>
     `
     
@@ -20,14 +21,15 @@ Vue.component('post', {
 
 // var apiURL = 'http://playground.dev/wp-json/wp/v2/posts';
 
-new Vue({
+var App = new Vue({
     el: '#app',
     data: {
         greeting: 'Load more Posts Vue + WP REST API',
         page : 0,
         posts: [],
         totalPages: '',
-        apiURL : 'http://playground.dev/wp-json/wp/v2/posts?per_page=2&page=',
+        apiURL : 'https://wordpress.org/news/wp-json/wp/v2/posts?per_page=2&page=',
+        isLoading: '',
         show : true
     },
     methods: {
@@ -37,7 +39,8 @@ new Vue({
             var self = this
             
             self.page++
-            
+            self.isLoading = 'is-loading'
+
             xhr.open('GET', self.apiURL + self.page)
             
             xhr.onload = function () {
@@ -53,7 +56,7 @@ new Vue({
                 newPosts.forEach(function(element) {
                     self.posts.push(element)
                 })
-                
+                self.isLoading = null
                 //console.log(self.apiURL + self.page)
             
             }
