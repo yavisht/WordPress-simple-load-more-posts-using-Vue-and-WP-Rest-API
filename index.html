@@ -1,33 +1,52 @@
-<!DOCTYPE html>
 <html>
+
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Load more Posts Vue + WP REST API</title>
-  <meta charset="utf-8"/>
-  <script src="https://unpkg.com/vue@2.4.2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
+  
+  <style>
+    .box{margin-top:50px;}
+  </style>
 </head>
+
 <body>
+
+<section id="app" class="wrapper">
+  <div class="container">
+    <div class="box">
+
+      <h1 class="title">{{ greeting }}</h1>
+      <h3 v-if="page>0">Showing Page {{page}} of {{totalPages}}</h3>
+            
+      <progress v-if="page>0" class="progress" :value="page" :max="totalPages">{{page}}</progress>
+        
+      <posts v-if="posts">
+        <post 
+          v-for="post in posts"
+          class="post"
+          :id="'post' + post.id"
+          :title="post.title.rendered"
+          :excerpt="post.excerpt.rendered"
+          :permalink="post.link"
+          :key="post.id">
+        </post>
+      </posts>
   
-  <div id="app">
-    
-    <h1>{{ greeting }}</h1>
-  
-    <h3 v-if="page>0">Showing Page {{page}} of {{totalPages}} </h3>
+      <button 
+        :class="isLoading + ' ' +'button is-primary'"  
+        v-if="show" 
+        @click="getPosts(page)">
+          Load Posts
+      </button>
 
-    <posts v-if="posts">
-      <post 
-        v-for="post in posts"
-        class="post"
-        :id="'post'+post.id"
-        :title="post.title.rendered"
-        :excerpt="post.excerpt.rendered"
-        :permalink="post.link"
-        :key="post.id">
-      </post>
-    </posts>
-
-    <button v-if="show" @click="getPosts(page)" class="load-posts">Load Posts</button>
-
+    </div>
   </div>
+</section>
+
+<script src="https://unpkg.com/vue@2.4.2"></script>
 <script src="app.js"></script>
+  
 </body>
 </html>
