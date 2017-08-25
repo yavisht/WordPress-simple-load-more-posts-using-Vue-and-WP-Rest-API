@@ -16,9 +16,11 @@
     <posts v-if="posts">
       <post 
         v-for="post in posts"
-        :id="post.id"
+        class="post"
+        :id="'post'+post.id"
         :title="post.title.rendered"
         :excerpt="post.excerpt.rendered"
+        :permalink="post.link"
         :key="post.id">
       </post>
     </posts>
