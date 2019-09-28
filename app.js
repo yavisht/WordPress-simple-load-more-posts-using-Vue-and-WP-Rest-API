@@ -11,7 +11,6 @@ Vue.component("post", {
   template: `
     <li>
         <h3 v-html="title"></h3>
-        <div v-if="excerpt" v-html="excerpt"></div>
         <a :href="permalink">Read More</a>
         <hr />
     </li>
