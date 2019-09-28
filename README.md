@@ -7,7 +7,7 @@ We will go through a minimalist Vue component based example that will fetch post
 Wouldn't it be cool to use something like this in your markup?
 
       <posts>
-        <post 
+        <post
           class="post"
           :id="post.id"
           :title="post.title.rendered"
@@ -17,12 +17,12 @@ Wouldn't it be cool to use something like this in your markup?
 
       <button @click="getPosts(page)">Load Posts</button>
 
-With an ability to output any markup you desire in html on compile for your styling needs. So the next time you need to make load more for your websites, your HTML markup remains the same. 
+With an ability to output any markup you desire in html on compile for your styling needs. So the next time you need to make load more for your websites, your HTML markup remains the same.
 
 Or perhaps try something like the code below for another post type.
 
       <movies>
-        <movie 
+        <movie
           class="movie"
           :id="movie.id"
           :title="movie.title.rendered"

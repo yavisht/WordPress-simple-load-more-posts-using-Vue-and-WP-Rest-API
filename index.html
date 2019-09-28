@@ -1,54 +1,49 @@
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Load more Posts Vue + WP REST API</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css">
-  
-  <style>
-    .box{margin-top:50px;}
-  </style>
-
-</head>
-
-<body>
-
-<section id="app" class="wrapper">
-  <div class="container">
-    <div class="box">
-
-      <h1 class="title">{{ greeting }}</h1>
-      <h3 v-if="page>0">Showing Page {{page}} of {{totalPages}}</h3>
-            
-      <progress v-if="page>0" class="progress" :value="page" :max="totalPages">{{page}}</progress>
-        
-      <posts v-if="posts">
-        <post 
-          v-for="post in posts"
-          class="post"
-          :id="'post' + post.id"
-          :title="post.title.rendered"
-          :permalink="post.link"
-          :key="post.id"
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Load more Posts Vue + WP REST API</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.1/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <section id="app" class="wrapper">
+      <div class="container">
+        <div class="box" style="margin-top: 50px;">
+          <h1 class="title">{{ greeting }}</h1>
+          <h3 v-if="page>0">Showing Page {{ page }} of {{ totalPages }}</h3>
+          <progress
+            v-if="page>0"
+            class="progress"
+            :value="page"
+            :max="totalPages"
           >
-          <!-- Add above for excerpt :excerpt="post.excerpt.rendered" -->
-        </post>
-      </posts>
-  
-      <button 
-        :class="isLoading + ' ' +'button is-primary'"  
-        v-if="show" 
-        @click="getPosts(page)">
-          Load Posts
-      </button>
-
-    </div>
-  </div>
-</section>
-
-<script src="https://unpkg.com/vue@2.4.2"></script>
-<script src="app.js"></script>
-  
-</body>
+            {{ page }}
+          </progress>
+          <posts v-if="posts">
+            <post
+              v-for="post in posts"
+              :key="post.id"
+              class="post"
+              :id="'post' + post.id"
+              :title="post.title.rendered"
+              :permalink="post.link"
+            >
+            </post>
+          </posts>
+          <button
+            :class="isLoading + ' ' + 'button is-primary'"
+            v-if="show"
+            @click="getPosts(page)"
+          >
+            Load Posts
+          </button>
+        </div>
+      </div>
+    </section>
+    <script src="https://unpkg.com/vue@2.4.2"></script>
+    <script src="app.js"></script>
+  </body>
 </html>
