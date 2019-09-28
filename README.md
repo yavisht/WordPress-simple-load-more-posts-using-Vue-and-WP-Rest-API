@@ -1,3 +1,5 @@
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 # Load more posts using Vue.js and WP Rest API
 
 We will go through a minimalist Vue component based example that will fetch posts using WordPress Rest API.
