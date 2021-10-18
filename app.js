@@ -24,9 +24,12 @@ var App = new Vue({
     page: 0,
     posts: [],
     totalPages: "",
-    apiURL: "https://wordpress.org/news/wp-json/wp/v2/posts?per_page=2&page=",
+    apiURL: "https://wordpress.org/news/wp-json/wp/v2/posts?per_page=4&page=",
     isLoading: "",
     show: true,
+  },
+  mounted () {
+    this.getPosts();
   },
   methods: {
     getPosts: function() {
