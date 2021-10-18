@@ -28,7 +28,7 @@ var App = new Vue({
     isLoading: "",
     show: true,
   },
-  mounted () {
+  mounted: function mounted() {
     this.getPosts();
   },
   methods: {
