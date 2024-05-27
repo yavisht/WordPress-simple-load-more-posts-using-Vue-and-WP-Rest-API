@@ -2,9 +2,13 @@
 
 # Load more posts using Vue.js and WP Rest API
 
+## Whats New?
+- Now uses Vue 3@latest (CDN)
+- No server or build step needed, simply run index.html in your browser!
+
 We will go through a minimalist Vue component based example that will fetch posts using WordPress Rest API.
 
-![enter image description here](https://drive.google.com/uc?id=1DvoN6jqz0pU7MmJuULe9UXnb1ivdWKCa)
+![demo](https://github.com/yavisht/WordPress-simple-load-more-posts-using-Vue-and-WP-Rest-API/assets/6112201/bc262c1b-53fd-4939-a318-54cfd40f01b1)
 
 Wouldn't it be cool to use something like this in your markup?
 
