@@ -1,59 +1,74 @@
-Vue.component("posts", {
-  template: `
-    <ul>
-        <slot></slot>
-    </ul>
-    `,
-});
+const { createApp, ref, onMounted } = Vue;
 
-Vue.component("post", {
+const Posts = {
+  template: `
+        <ul>
+            <slot></slot>
+        </ul>
+      `,
+};
+
+const Post = {
   props: ["title", "permalink"],
   template: `
-    <li>
-        <h3 v-html="title"></h3>
-        <a :href="permalink">Read More</a>
-        <hr />
-    </li>
-    `,
-});
+        <li>
+            <h3 v-html="title"></h3>
+            <a :href="permalink">Read More</a>
+            <hr />
+        </li>
+      `,
+};
 
-var App = new Vue({
-  el: "#app",
-  data: {
-    greeting: "Load more Posts Vue + WP REST API",
-    page: 0,
-    posts: [],
-    totalPages: "",
-    apiURL: "https://wordpress.org/news/wp-json/wp/v2/posts?per_page=4&page=",
-    isLoading: "",
-    show: true,
-  },
-  mounted: function mounted() {
-    this.getPosts();
-  },
-  methods: {
-    getPosts: function() {
-      var xhr = new XMLHttpRequest();
-      var self = this;
+const App = {
+  components: { Posts, Post },
+  setup() {
+    const greeting = ref("Load more Posts Vue + WP REST API");
+    const page = ref(0);
+    const posts = ref([]);
+    const totalPages = ref("");
+    const perPage = ref(4);
+    const apiURL = `https://wordpress.org/news/wp-json/wp/v2/posts?per_page=${perPage.value}&page=`;
+    const isLoading = ref("");
+    const show = ref(true);
 
-      self.page++;
-      self.isLoading = "is-loading";
+    const getPosts = () => {
+      const xhr = new XMLHttpRequest();
 
-      xhr.open("GET", self.apiURL + self.page);
+      page.value++;
+      isLoading.value = "is-loading";
 
-      xhr.onload = function() {
-        self.totalPages = xhr.getResponseHeader("X-WP-TotalPages");
-        if (self.page == self.totalPages) {
-          self.show = false;
+      xhr.open("GET", apiURL + page.value);
+
+      xhr.onload = () => {
+        totalPages.value = xhr.getResponseHeader("X-WP-TotalPages");
+        if (page.value == totalPages.value) {
+          show.value = false;
         }
-        var newPosts = JSON.parse(xhr.responseText);
-        newPosts.forEach(function(element) {
-          self.posts.push(element);
+        const newPosts = JSON.parse(xhr.responseText);
+        newPosts.forEach((element) => {
+          posts.value.push(element);
         });
-        self.isLoading = null;
+        isLoading.value = null;
       };
 
       xhr.send();
-    },
+    };
+
+    onMounted(() => {
+      getPosts();
+    });
+
+    return {
+      greeting,
+      page,
+      posts,
+      totalPages,
+      apiURL,
+      isLoading,
+      show,
+      getPosts,
+    };
   },
-});
+};
+
+createApp(App).component("Posts", Posts).component("Post", Post).mount("#app");
